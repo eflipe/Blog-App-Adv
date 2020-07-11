@@ -7,7 +7,7 @@
   <body>
     <h1 class="">Template index para {{ title }}</h1>
     {% for obj in obj_list  %}
-    <h3 class=""> {{ obj.title }}   </h3>
+    <a href="{{ obj.get_absolute_url }}" class=""><h3 class=""> {{ obj.title }} </h3></a>
     <h3 class=""> {{ obj.content }}   </h3>
     <h3 class=""> {{ obj.update }}   </h3>
     <h3 class=""> {{ obj.timestamp }}   </h3>

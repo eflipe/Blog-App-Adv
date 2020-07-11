@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from blog_app.models import Post
 
 '''
@@ -18,6 +18,7 @@ queryset = <model_name>.objects.all()
 for obj in queryset:
     print(obj.<field>)
 
+instance = Post.objects.get(id=1)
 '''
 
 
@@ -26,8 +27,14 @@ def post_create(request):
     return HttpResponse("<h1 class="">Create</h1>")
 
 
-def post_detail(request):
-    return HttpResponse("<h1 class="">Detail</h1>")
+def post_detail(request, id):
+    instance = get_object_or_404(Post, id=id)
+    context = {
+        "title": instance.title,
+        "obj": instance,
+    }
+    return render(request, "post_detail.html", context)
+    #return HttpResponse("<h1 class="">Detail</h1>")
 
 
 def post_list(request):
