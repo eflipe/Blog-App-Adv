@@ -7,10 +7,12 @@ from blog_app.views import (
     post_update,
     )
 
+app_name = 'blog_app'
+
 urlpatterns = [
-    path('', post_list),
+    path('', post_list, name='index'),
     path('create/', post_create),
-    path('delete/', post_delete),
-    path('update/', post_update),
+    path('<id>/delete/', post_delete, name='delete'),
+    path('<id>/edit/', post_update, name='update'),
     path('<id>/', post_detail, name='detail'),
 ]
