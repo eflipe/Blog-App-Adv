@@ -2,14 +2,23 @@
 
 {% block content %}
 
-  <h1 class="">Template index para {{ title }}</h1>
 
-  {% for obj in obj_list  %}
-  <a href="{{ obj.get_absolute_url }}" class=""><h3 class=""> {{ obj.title }} </h3></a>
-  <h3 class=""> {{ obj.content }}   </h3>
-  <h3 class=""> {{ obj.update }}   </h3>
-  <h3 class=""> {{ obj.timestamp }}   </h3>
-  <h3 class=""> {{ obj.id }}   </h3>
+<div class="col-sm-8 col-sm-offset-3">
+  <h1 class="">{{ title }}</h1>
+    {% for obj in obj_list  %}
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card mb-2" style="width: 22rem;">
+              {# <img src="..." class="card-img-top" alt="..."> #}
+          <div class="card-body">
+            <h5 class="card-title"><a href="{{ obj.get_absolute_url }}" class="">{{ obj.title }}</a></h5>
+            <p class="card-text">{{ obj.content|linebreaks }}</p>
+            <a href="#" class="btn btn-primary">Leer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   {% endfor %}
 
 {% endblock content %}
