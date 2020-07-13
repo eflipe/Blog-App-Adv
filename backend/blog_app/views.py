@@ -33,8 +33,6 @@ def post_create(request):
         instance.save()
         messages.success(request, 'Cool!')
         return HttpResponseRedirect(instance.get_absolute_url())
-    else:
-        messages.error(request, 'Err!')
 
     context = {
         "form": form,
@@ -58,7 +56,7 @@ def post_list(request):
         "obj_list": queryset,
         "title": "List View",
     }
-    return render(request, '_base.html', context_data)
+    return render(request, 'post_list.html', context_data)
     #return HttpResponse("<h1 class="">List</h1>")
 
 
