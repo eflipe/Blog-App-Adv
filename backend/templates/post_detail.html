@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load urlify %}
 
 {% block head_title %}
   {{ obj.title }} | {{ block.super }}
@@ -14,6 +15,15 @@
 <h1 class="">{{ title }}
 <small>{{ obj.timestamp }} </small>
 </h1>
+
+
+<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+  Facebook
+</a>
+<a href="https://twitter.com/home?status={{ instance.content|urlify  }}%20{{ request.build_absolute_uri }}">
+  Twitter
+</a>
+
 
 <h6 class=""> {{ obj.content|linebreaks }}   </h6><br>
 
