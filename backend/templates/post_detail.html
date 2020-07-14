@@ -8,6 +8,9 @@
 {% block content %}
 
 <div class="col-sm-6 col-sm-offset-3">
+  {% if obj.img %}
+  <img src="{{ obj.img.url }}" alt="" class="img-fluid">
+  {% endif %}
 <h1 class="">{{ title }}
 <small>{{ obj.timestamp }} </small>
 </h1>

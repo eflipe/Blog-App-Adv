@@ -26,7 +26,7 @@ instance = Post.objects.get(id=1)
 
 
 def post_create(request):
-    form = PostForm(request.POST)
+    form = PostForm(request.POST, request.FILES or None)
 
     if form.is_valid():
         instance = form.save(commit=False)
@@ -54,7 +54,7 @@ def post_detail(request, id):
 def post_list(request):
     queryset_list = Post.objects.all() #.order_by("-timestamp")
     paginator = Paginator(queryset_list, 3)
-    
+
     page = request.GET.get('page')
     try:
         queryset = paginator.page(page)
@@ -73,7 +73,7 @@ def post_list(request):
 
 def post_update(request, id=None):
     instance = get_object_or_404(Post, id=id)
-    form = PostForm(request.POST or None, instance=instance)
+    form = PostForm(request.POST or None, request.FILES or None, instance=instance)
 
     if form.is_valid():
         instance = form.save(commit=False)
