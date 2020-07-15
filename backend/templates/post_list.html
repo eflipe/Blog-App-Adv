@@ -5,6 +5,10 @@
 
 <div class="col-sm-8 col-sm-offset-3">
   <h1 class="">{{ title }}</h1>
+  <form method="GET" class="">
+    <input type="text" name="q" class="" placeholder="Search...">
+    <input type="submit" value="search" class="">
+  </form>
     {% for obj in obj_list  %}
     <div class="row">
       <div class="col-sm-12">
@@ -26,7 +30,7 @@
     <span class="step-links">
         {% if obj_list.has_previous %}
             <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ obj_list.previous_page_number }}">previous</a>
+            <a href="?page={{ obj_list.previous_page_number }}&q={{ request.GET.q}} ">previous</a>
         {% endif %}
 
         <span class="current">

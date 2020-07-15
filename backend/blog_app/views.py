@@ -1,4 +1,5 @@
 from urllib.parse import quote
+from django.db.models import Q
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, HttpResponseRedirect,Http404
@@ -57,9 +58,15 @@ def post_detail(request, id):
 
 
 def post_list(request):
-    queryset_list = Post.objects.all() #.order_by("-timestamp")
-    paginator = Paginator(queryset_list, 3)
+    queryset_list = Post.objects.active() #.order_by("-timestamp")
+    query = request.GET.get("q")
+    if query:
+        queryset_list = queryset_list.filter(
+                        Q(title__icontains=query) |
+                        Q(content__icontains=query)
 
+                        )
+    paginator = Paginator(queryset_list, 3)
     page = request.GET.get('page')
     try:
         queryset = paginator.page(page)
