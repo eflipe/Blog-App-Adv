@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load markdown_deux_tags %}
 
 {% block content %}
 
@@ -18,7 +19,7 @@
           {% endif %}
           <div class="card-body">
             <h5 class="card-title"><a href="{{ obj.get_absolute_url }}" class="">{{ obj.title }}</a></h5>
-            <p class="card-text">{{ obj.content|linebreaks|truncatechars:120 }}</p>
+            <p class="card-text">{{ obj.content|truncatechars:120|markdown }}</p>
             <a href="#" class="btn btn-primary">Leer</a>
           </div>
         </div>
