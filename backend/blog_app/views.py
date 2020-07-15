@@ -1,7 +1,7 @@
 from urllib.parse import quote
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect,Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from blog_app.models import Post
 from .forms import PostForm
@@ -28,9 +28,11 @@ instance = Post.objects.get(id=1)
 
 def post_create(request):
     form = PostForm(request.POST, request.FILES or None)
-
+    if not request.user.is_staff or request.user.is_superuser:
+        raise Http404
     if form.is_valid():
         instance = form.save(commit=False)
+        instance.user = request.user
         # print(form.cleaned_data.get("title"))
         instance.save()
         messages.success(request, 'Cool!')
@@ -75,6 +77,8 @@ def post_list(request):
 
 
 def post_update(request, id=None):
+    if not request.user.is_staff or request.user.is_superuser:
+        raise Http404
     instance = get_object_or_404(Post, id=id)
     form = PostForm(request.POST or None, request.FILES or None, instance=instance)
 
@@ -93,6 +97,9 @@ def post_update(request, id=None):
 
 
 def post_delete(request, id=None):
+    if not request.user.is_staff or request.user.is_superuser:
+        raise Http404
+
     instance = get_object_or_404(Post, id=id)
     instance.delete()
     messages.success(request, 'Delete!!!')

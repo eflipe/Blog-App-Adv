@@ -12,9 +12,10 @@
   {% if obj.img %}
   <img src="{{ obj.img.url }}" alt="" class="img-fluid">
   {% endif %}
-<h1 class="">{{ title }}
-<small>{{ obj.timestamp }} </small>
-</h1>
+  <h1 class="">{{ title }}
+    <small>{{ obj.timestamp }} </small>
+<p class="">Autor: {{ obj.user }}
+</p>
 
 
 <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
