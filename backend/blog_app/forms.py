@@ -11,7 +11,9 @@ class PostForm(forms.ModelForm):
         fields = [
             "title",
             "content",
-            "img"
+            "img",
+            "draft",
+            "publish"
         ]
 
     def __init__(self, *args, **kwargs):

@@ -28,8 +28,8 @@ instance = Post.objects.get(id=1)
 
 def post_create(request):
     form = PostForm(request.POST, request.FILES or None)
-    if not request.user.is_staff or request.user.is_superuser:
-        raise Http404
+    # if not request.user.is_staff or request.user.is_superuser:
+    #     raise Http404
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user = request.user
@@ -77,8 +77,8 @@ def post_list(request):
 
 
 def post_update(request, id=None):
-    if not request.user.is_staff or request.user.is_superuser:
-        raise Http404
+    # if not request.user.is_staff or request.user.is_superuser:
+    #     raise Http404
     instance = get_object_or_404(Post, id=id)
     form = PostForm(request.POST or None, request.FILES or None, instance=instance)
 

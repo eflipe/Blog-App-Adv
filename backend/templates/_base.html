@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}" class="">
   </head>
   <body>
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v7.0" nonce="tNX22FEb"></script>
     {% include "messages_display.html" %}
     <div class="container">
       {% block content %}
