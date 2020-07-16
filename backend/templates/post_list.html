@@ -6,14 +6,19 @@
 
 <div class="col-sm-8 col-sm-offset-3">
   <h1 class="">{{ title }}</h1>
-  <form method="GET" class="">
-    <input type="text" name="q" class="" placeholder="Search...">
-    <input type="submit" value="search" class="">
-  </form>
+<form method="GET" class="">
+  <div class="input-group mb-3 mt-2">
+  <input type="text" name="q" class="form-control" placeholder="Buscar..." aria-label="Search" aria-describedby="button-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" value="search" type="submit" id="button-addon2">>>></button>
+  </div>
+</div>
+</form>
+
     {% for obj in obj_list  %}
     <div class="row">
       <div class="col-sm-12">
-        <div class="card mb-2 post-detail-item" style="width: 25rem;">
+        <div class="card mb-2 post-detail-item" style="width: 42rem;">
           {% if obj.img %}
               <img src="{{ obj.img.url }}" class="card-img-top" alt="...">
           {% endif %}
