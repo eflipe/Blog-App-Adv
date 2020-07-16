@@ -2,8 +2,10 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 from django.db.models.signals import pre_save
-
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
+
+from markdown_deux import markdown
 
 
 class PostManager(models.Manager):
@@ -45,6 +47,10 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog_app:detail', kwargs={'id': self.id})
         #return f'/posts/{self.id}/'
+
+    def get_markdown(self):
+        content = self.content
+        return mark_safe(markdown(content))
 
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):

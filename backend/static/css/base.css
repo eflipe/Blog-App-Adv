@@ -1,3 +1,8 @@
-h1 {
-  color: blue;
+.wmd-preview{
+    display: none;
+}
+
+.wmd-panel {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
 }

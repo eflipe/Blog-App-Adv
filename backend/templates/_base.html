@@ -30,7 +30,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script>
   <script type="text/javascript">
-    // $(document).ready(function(){
+    $(document).ready(function(){
     //   $(".content-markdown").each(function(){
     //         var content = $(this).text()
     //         console.log(content);
@@ -39,6 +39,18 @@
     //         $(this).html(markedContent)
     //   })
     // })
+    $(".post-detail-item img").each(function(){
+          $(this).addClass("img-fluid")
+
+    })
+    var titleItem = $("#id_title");
+    $("preview-title").text(titleItem.val())
+    console.log(titleItem);
+    var contentItem = $("#wmd-preview-id_content");
+    $("preview-content").text(contentItem.val())
+    console.log(contentItem);
+
+  })
   </script>
 
   </body>

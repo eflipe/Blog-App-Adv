@@ -29,7 +29,7 @@
 
 <div class="row">
 <div class="col-sm-12">
-<h6 class="content-markdown"> {{ obj.content|markdown }}   </h6><br>
+<h6 class="post-detail-item"> {{ obj.get_markdown }}   </h6><br>
 
 <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5" data-width=""></div>
 

@@ -1,17 +1,20 @@
 {% extends "_base.html" %}
+{% load crispy_forms_tags %}
 
 {% block head_extra %}
   {{ form.media }}
 {% endblock head_extra %}
 
 {% block content %}
-<div class="col-sm-8 col-sm-offset-3">
+<div class="row">
+<div class="col-sm-6">
 <h1 class="">Form</h1>
 
 <form method='POST' action="" class="" enctype="multipart/form-data">
 {% csrf_token %}
-{{ form.as_p }}
+{{ form|crispy }}
 <input type="submit" name="" value="Create Post">
 </form>
+</div>
 </div>
 {% endblock content %}

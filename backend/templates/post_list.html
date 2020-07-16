@@ -13,14 +13,14 @@
     {% for obj in obj_list  %}
     <div class="row">
       <div class="col-sm-12">
-        <div class="card mb-2" style="width: 25rem;">
+        <div class="card mb-2 post-detail-item" style="width: 25rem;">
           {% if obj.img %}
               <img src="{{ obj.img.url }}" class="card-img-top" alt="...">
           {% endif %}
           <div class="card-body">
             <h5 class="card-title"><a href="{{ obj.get_absolute_url }}" class="">{{ obj.title }}</a></h5>
-            <p class="card-text">{{ obj.content|truncatechars:120|markdown }}</p>
-            <a href="#" class="btn btn-primary">Leer</a>
+            <p class="card-text">{{ obj.get_markdown|truncatechars_html:120 }}</p>
+            <a href="{{ obj.get_absolute_url }}" class="btn btn-primary">Leer</a>
           </div>
         </div>
       </div>
