@@ -1,9 +1,11 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
+from comments_app.models import Comment
 
 from markdown_deux import markdown
 
@@ -37,7 +39,7 @@ class Post(models.Model):
     objects = PostManager()
 
     class Meta:
-        verbose_name = 'Post'
+        verbose_name = 'post'
         verbose_name_plural = 'Posts'
         ordering = ["-id", "-timestamp", "-update"]
 
@@ -51,6 +53,18 @@ class Post(models.Model):
     def get_markdown(self):
         content = self.content
         return mark_safe(markdown(content))
+
+    @property
+    def comments(self):
+        instance = self
+        qs = Comment.objects.filter_by_instance(instance)
+        return qs
+
+    @property
+    def get_content_type(self):
+        instance = self
+        content_type = ContentType.objects.get_for_model(instance.__class__).model
+        return content_type
 
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):

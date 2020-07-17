@@ -1,5 +1,6 @@
 {% extends "_base.html" %}
 {% load urlify %}
+{% load crispy_forms_tags %}
 {% load markdown_deux_tags %}
 
 {% block head_title %}
@@ -31,7 +32,50 @@
 <div class="col-sm-12">
 <h6 class="post-detail-item"> {{ obj.get_markdown }}   </h6><br>
 
-<div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5" data-width=""></div>
+<div class="">
+  <p class="lead">Comentarios</p>
+  <form method="POST" action="." class="">
+    {% csrf_token %}
+    {{ comment_form|crispy }}
+    <input type="submit" value='Post comment' class="btn btn-default">
+  </form>
+
+  <hr/>
+
+  {% for com in comments  %}
+  <blockquote class="blockquote">
+    <p class="mb-0">{{ com.content}}</p>
+    <footer class="blockquote-footer">{{ com.user }} | {{ com.timestamp|timesince }}
+      | {% if com.children.count > 0 %}{{ com.children.count }} Comentarios | {% endif %}
+       <a href="#" class="com-reply-btn">Responder</a>
+    </footer>
+
+    <div class="com-reply">
+    {% for child_comment in com.children  %}
+    <blockquote class="blockquote">
+      <p class="mb-0">{{ child_comment.content}}</p>
+      <footer class="blockquote-footer">{{ child_comment.user }} | {{ child_comment.timestamp|timesince }} </footer>
+    </blockquote>
+
+    {% endfor %}
+
+
+    <form method="POST" action="." class="">
+      {% csrf_token %}
+      {{ comment_form|crispy }}
+      <input type="hidden" name="parent_id" value="{{ com.id }}">
+      <input type="submit" value='Responder' class="btn btn-default">
+    </form>
+    </div>
+  </blockquote>
+
+<hr>
+  {% endfor %}
+
+</div>
+
+
+{# <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5" data-width=""></div> #}
 
 </div>
 </div>
